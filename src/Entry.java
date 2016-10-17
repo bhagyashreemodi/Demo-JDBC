@@ -31,11 +31,12 @@ public class Entry {
 		String insertQuery = props.getProperty("jdbc.query.insert");*/
 		insertStatement = dbConnection.prepareStatement(props.getProperty("jdbc.query.insert"));
 		String message = "This is JAVA";
+		
 		insertStatement.setString(1, message);
-		insertStatement.setString(2, message);
-		insertStatement.setString(3, message);
-		int rows = insertStatement.executeUpdate();
-		System.out.println(rows + " records is(are) added successfully");
+		insertStatement.setInt(2, 23);
+		//insertStatement.setString(3, message);
+		insertStatement.execute();
+		//System.out.println(rows + " records is(are) added successfully");
 		/*try(Statement selectStatement = dbConnection.createStatement()){
 			ResultSet selectResult = selectStatement.executeQuery(props.getProperty("jdbc.query.select"));
 			while(selectResult.next()){
@@ -45,9 +46,9 @@ public class Entry {
 		}*/
 		
 		}finally{
-		
+			dbConnection.close();
 		insertStatement.close();
-		dbConnection.close();
+		
 		}
 		
 	}
